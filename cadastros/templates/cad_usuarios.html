@@ -1,0 +1,191 @@
+{% extends 'base_login.html' %}
+
+{% block 'titulo' %}
+Cadastro de usuários
+{% endblock %}
+
+{% block 'conteudo' %}
+
+<div class="container">
+    <br>
+    {% if status == '1' %}
+    <div class='alert alert-success' role='alert'>
+        Cadastrado com sucesso!
+    </div>
+    {% endif %}
+    {% if status == '2' %}
+    <div class='alert alert-danger' role='alert'>
+        Usuário já cadastrado.
+    </div>
+    {% endif %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'pesquisa_usuarios' %}">Pesquisa</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'cadastro_usuarios' %}">Cadastro</a>
+        </li>
+    </ul>
+    <h2>Cadastro de Usuário</h2>
+    <form action="{% url 'valida_usuario' %}" method="POST"> {% csrf_token %}
+        <div class="form-group">
+            <label for="inputNome">Nome Completo</label>
+            <input type="text" class="form-control" name="inputNome" id="inputNome" placeholder="Nome completo">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="inputDataNasc">Data de Nascimento</label>
+                <input type="date" class="form-control" name="inputDataNasc" id="inputDataNasc">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="inputCPF">C.P.F.</label>
+                <input type="text" class="form-control" name="inputCPF" id="inputCPF" oninput="mascara(this, 'cpf')"
+                    placeholder="000.000.000-00">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="inputCNS">C.N.S.</label>
+                <input type="text" class="form-control" name="inputCNS" id="inputCNS" oninput="mascara(this, 'cns')"
+                    placeholder="000.0000.0000.0000">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="inputSexo">Sexo</label>
+                <select name="inputSexo" id="inputSexo" class="form-control">
+                    <option value="M" selected>Masculino</option>
+                    <option value="F">Feminino</option>
+                    <option value="I">Ignorado</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputNomeMae">Nome da Mãe</label>
+                <input type="text" class="form-control" name="inputNomeMae" id="inputNomeMae" placeholder="Nome da Mãe">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputNomePai">Nome do Pai</label>
+                <input type="text" class="form-control" name="inputNomePai" id="inputNomePai" placeholder="Nome do Pai">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="inputCEP">CEP:</label>
+                <input type="text" class="form-control" name="inputCEP" id="inputCEP" oninput="mascara(this, 'cep')"
+                    placeholder="00000-000">
+            </div>
+            <div class="form-group col-md-10">
+                <label for="inputEndereco">Endereço</label>
+                <input type="text" class="form-control" name="inputEndereco" id="inputEndereco"
+                    placeholder="Rua/Avenida/Alameda/...">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="inputNumeroEndereco">Nº:</label>
+                <input type="text" class="form-control" name="inputNumeroEndereco" id="inputNumeroEndereco"
+                    placeholder="Nº">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputComplementoEndereco">Complemento:</label>
+                <input type="text" class="form-control" name="inputComplementoEndereco" id="inputComplementoEndereco"
+                    placeholder="Casa, Apto, etc...">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputBairro">Bairro</label>
+                <input type="text" class="form-control" name="inputBairro" id="inputBairro"
+                    placeholder="Nome do Bairro">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputCidade">Cidade:</label>
+                <input type="text" class="form-control" name="inputCidade" id="inputCidade" placeholder="Cidade">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputEstado">Estado</label>
+                <select name="inputEstado" id="inputEstado" class="form-control">
+                    <option value="." selected>...</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPontoReferencia">Ponto de Referência</label>
+                <input type="text" class="form-control" name="inputPontoReferencia" id="inputPontoReferencia"
+                    placeholder="Próximo ao ...">
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="inputEmail">Endereço de email</label>
+            <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="nome@exemplo.com">
+        </div>
+        <div class="form-row">
+            <br>
+            <button type="submit" class="btn btn-success btn-lg">Cadastrar</button>
+        </div>
+    </form>
+
+</div>
+</div>
+
+<script>
+    function mascara(i, t) {
+
+        var v = i.value;
+
+        if (isNaN(v[v.length - 1])) {
+            i.value = v.substring(0, v.length - 1);
+            return;
+        }
+
+        if (t == "data") {
+            i.setAttribute("maxlength", "10");
+            if (v.length == 2 || v.length == 5) i.value += "/";
+        }
+
+        if (t == "cpf") {
+            i.setAttribute("maxlength", "14");
+            if (v.length == 3 || v.length == 7) i.value += ".";
+            if (v.length == 11) i.value += "-";
+        }
+
+        if (t == "cns") {
+            i.setAttribute("maxlength", "18");
+            if (v.length == 3 || v.length == 8 || v.length == 13) i.value += ".";
+        }
+
+        if (t == "cep") {
+            i.setAttribute("maxlength", "9");
+            if (v.length == 5) i.value += "-";
+        }
+    }
+
+    function teste(i) {
+        console.log(i.value)
+    }
+</script>
+{% endblock %}

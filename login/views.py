@@ -56,6 +56,14 @@ def valida_cadastro_login(request):
     nome_acesso = request.POST.get('nome_acesso')
     email = request.POST.get('email')
     senha = request.POST.get('senha')
+    cadastro_email = Login.objects.filter(email=email)
+    if cadastro_email:
+        return redirect('/auth/cadastro/?status=1')
+
+    cadastro_nome_acesso = Login.objects.filter(nome_acesso=nome_acesso)
+    if cadastro_nome_acesso:
+        return redirect('/auth/cadastro/?status=2')
+
     senha = hashlib.sha256(senha.encode()).hexdigest()
     validade_senha = 180
     data_expiracao = date.today() + timedelta(days=validade_senha)

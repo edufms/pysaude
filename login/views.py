@@ -45,7 +45,9 @@ def sair(request):
 def cadastro(request):
     if request.session.get('usuario'):
         return redirect('/home/saude/')
-    return render(request, 'cadastro.html')
+    
+    status = request.GET.get('status')
+    return render(request, 'cadastro.html', {'status': status})
 
 
 def valida_cadastro_login(request):

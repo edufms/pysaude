@@ -7,6 +7,22 @@ Cadastrar Operador
 {% block 'conteudo' %}
 
 <div class="container">
+    <br>
+    {% if status == '1' %}
+    <br>
+    <div class="alert alert-danger" role="alert"><b>
+            <center>Email já cadastrado.</center>
+        </b>
+    </div>
+    {% endif %}
+
+    {% if status == '2' %}
+    <br>
+    <div class="alert alert-danger" role="alert"><b>
+            <center>Nome de acesso em uso.</center>
+        </b>
+    </div>
+    {% endif %}
 
     <div class="row justify-content-md-center">
         <div class="col-md-6">

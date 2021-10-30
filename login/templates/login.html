@@ -31,7 +31,16 @@ Logar no Sistema
         </b>
     </div>
     {% endif %}
-    <div class="row">
+    {% if status == '4' %}
+    <br>
+    <div class="alert alert-success" role="alert"><b>
+            <center>
+                Usuário cadastrado, entre com seu Nome de Acesso/Email e Senha!
+            </center>
+        </b>
+    </div>
+    {% endif %}
+    <div class="row justify-content-md-center">
         <div class="col-md-3">
 
         </div>
@@ -48,7 +57,7 @@ Logar no Sistema
                 <input class="form-control" type="password" placeholder="Senha" name="senha" required>
                 <br>
                 <button class="btn btn-primary" type="submit"> Login </button>
-                <a href="#" class="btn btn-info">Cadastre-se</a>
+                <a href="{% url 'cadastro_login' %}" class="btn btn-info">Cadastre-se</a>
             </form>
         </div>
         <div class="col-md-3">

@@ -30,26 +30,28 @@ Cadastro de usuários
     <form action="{% url 'valida_usuario' %}" method="POST"> {% csrf_token %}
         <div class="form-group">
             <label for="inputNome">Nome Completo</label>
-            <input type="text" class="form-control" name="inputNome" id="inputNome" placeholder="Nome completo">
+            <input input class="form-control form-control-sm" type="text" class="form-control" name="inputNome"
+                id="inputNome" placeholder="Nome completo">
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="inputDataNasc">Data de Nascimento</label>
-                <input type="date" class="form-control" name="inputDataNasc" id="inputDataNasc">
+                <input input class="form-control form-control-sm" type="date" class="form-control" name="inputDataNasc"
+                    id="inputDataNasc">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputCPF">C.P.F.</label>
-                <input type="text" class="form-control" name="inputCPF" id="inputCPF" oninput="mascara(this, 'cpf')"
-                    placeholder="000.000.000-00">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputCPF"
+                    id="inputCPF" oninput="mascara(this, 'cpf')" placeholder="000.000.000-00">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputCNS">C.N.S.</label>
-                <input type="text" class="form-control" name="inputCNS" id="inputCNS" oninput="mascara(this, 'cns')"
-                    placeholder="000.0000.0000.0000">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputCNS"
+                    id="inputCNS" oninput="mascara(this, 'cns')" placeholder="000.0000.0000.0000">
             </div>
             <div class="form-group col-md-3">
                 <label for="inputSexo">Sexo</label>
-                <select name="inputSexo" id="inputSexo" class="form-control">
+                <select input class="form-control form-control-sm" name="inputSexo" id="inputSexo" class="form-control">
                     <option value="M" selected>Masculino</option>
                     <option value="F">Feminino</option>
                     <option value="I">Ignorado</option>
@@ -59,50 +61,54 @@ Cadastro de usuários
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputNomeMae">Nome da Mãe</label>
-                <input type="text" class="form-control" name="inputNomeMae" id="inputNomeMae" placeholder="Nome da Mãe">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputNomeMae"
+                    id="inputNomeMae" placeholder="Nome da Mãe">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputNomePai">Nome do Pai</label>
-                <input type="text" class="form-control" name="inputNomePai" id="inputNomePai" placeholder="Nome do Pai">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputNomePai"
+                    id="inputNomePai" placeholder="Nome do Pai">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="inputCEP">CEP:</label>
-                <input type="text" class="form-control" name="inputCEP" id="inputCEP" oninput="mascara(this, 'cep')"
-                    placeholder="00000-000">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputCEP"
+                    id="inputCEP" oninput="mascara(this, 'cep')" placeholder="00000-000">
             </div>
             <div class="form-group col-md-10">
                 <label for="inputEndereco">Endereço</label>
-                <input type="text" class="form-control" name="inputEndereco" id="inputEndereco"
-                    placeholder="Rua/Avenida/Alameda/...">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputEndereco"
+                    id="inputEndereco" placeholder="Rua/Avenida/Alameda/...">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="inputNumeroEndereco">Nº:</label>
-                <input type="text" class="form-control" name="inputNumeroEndereco" id="inputNumeroEndereco"
-                    placeholder="Nº">
+                <input input class="form-control form-control-sm" type="text" class="form-control"
+                    name="inputNumeroEndereco" id="inputNumeroEndereco" placeholder="Nº">
             </div>
             <div class="form-group col-md-4">
                 <label for="inputComplementoEndereco">Complemento:</label>
-                <input type="text" class="form-control" name="inputComplementoEndereco" id="inputComplementoEndereco"
-                    placeholder="Casa, Apto, etc...">
+                <input input class="form-control form-control-sm" type="text" class="form-control"
+                    name="inputComplementoEndereco" id="inputComplementoEndereco" placeholder="Casa, Apto, etc...">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputBairro">Bairro</label>
-                <input type="text" class="form-control" name="inputBairro" id="inputBairro"
-                    placeholder="Nome do Bairro">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputBairro"
+                    id="inputBairro" placeholder="Nome do Bairro">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="inputCidade">Cidade:</label>
-                <input type="text" class="form-control" name="inputCidade" id="inputCidade" placeholder="Cidade">
+                <input input class="form-control form-control-sm" type="text" class="form-control" name="inputCidade"
+                    id="inputCidade" placeholder="Cidade">
             </div>
             <div class="form-group col-md-2">
                 <label for="inputEstado">Estado</label>
-                <select name="inputEstado" id="inputEstado" class="form-control">
+                <select input class="form-control form-control-sm" name="inputEstado" id="inputEstado"
+                    class="form-control">
                     <option value="." selected>...</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
@@ -135,15 +141,15 @@ Cadastro de usuários
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPontoReferencia">Ponto de Referência</label>
-                <input type="text" class="form-control" name="inputPontoReferencia" id="inputPontoReferencia"
-                    placeholder="Próximo ao ...">
+                <input input class="form-control form-control-sm" type="text" class="form-control"
+                    name="inputPontoReferencia" id="inputPontoReferencia" placeholder="Próximo ao ...">
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-group">
             <label for="inputEmail">Endereço de email</label>
-            <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="nome@exemplo.com">
-        </div>
-        <div class="form-row">
+            <input input class="form-control form-control-sm" type="email" class="form-control" name="inputEmail"
+                id="inputEmail" placeholder="nome@exemplo.com">
+            <br>
             <button type="submit" class="btn btn-success btn-lg">Cadastrar</button>
         </div>
     </form>

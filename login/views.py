@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
 import hashlib
+import json
 from datetime import date, timedelta
 from .models import Login, LogLogin
 
@@ -45,7 +46,7 @@ def sair(request):
 def cadastro(request):
     if request.session.get('usuario'):
         return redirect('/home/saude/')
-    
+
     status = request.GET.get('status')
     return render(request, 'cadastro.html', {'status': status})
 
@@ -77,3 +78,26 @@ def valida_cadastro_login(request):
     novo_cadastro.save()
 
     return redirect('/auth/login/?status=4')
+
+
+def valida_email(request):
+    email = request.POST.get('email')
+    email = email.replace(" ", "")
+    if '@' in email:
+        valida_email = Login.objects.filter(email=email)
+
+        if valida_email:
+            return HttpResponse(json.dumps({'status': '1'}))
+        else:
+            return HttpResponse(json.dumps({'status': '2'}))
+    return HttpResponse(json.dumps({'status': '3'}))
+
+
+def valida_usuario_login(request):
+    nome_acesso = request.POST.get('nome_acesso')
+    nome_acesso = nome_acesso.replace(" ", "")
+    valida_nome_acesso = Login.objects.filter(nome_acesso=nome_acesso)
+    if valida_nome_acesso:
+        return HttpResponse(json.dumps({'status': '1'}))
+    else:
+        return HttpResponse(json.dumps({'status': '2'}))

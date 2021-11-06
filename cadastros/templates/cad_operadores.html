@@ -35,7 +35,7 @@ Cadastrar Operador
         <div class="col-md-6">
             <br>
             <h2>Cadastro de Operador</h2>
-            <form class="needs-validation" action="{% url 'valida_cadastro_operador' %}" method="POST" novalidate>
+            <form class="needs-validation" action="{% url 'valida_operador' %}" method="POST" novalidate>
                 {% csrf_token %}
                 <label for="nome_completo">Nome Completo</label>
                 <input type="text" class="form-control " name="nome_completo" id="nome_completo"

@@ -13,12 +13,12 @@ def valida_usuario(request):
     nome_completo = request.POST.get('inputNome')
     nome_social = ''
     sexo = request.POST.get('inputSexo')
-    cpf = request.POST.get('inputCPF')
-    cns = request.POST.get('inputCNS')
+    cpf = request.POST.get('inputCPF').replace('.', '').replace('-', '')
+    cns = request.POST.get('inputCNS').replace('.', '')
     data_nascimento = request.POST.get('inputDataNasc')
     nome_mae = request.POST.get('inputNomeMae')
     nome_pai = request.POST.get('inputNomePai')
-    cep = request.POST.get('inputCEP')
+    cep = request.POST.get('inputCEP').replace('-','')
     logradouro = request.POST.get('inputEndereco')
     num_endereco = request.POST.get('inputNumeroEndereco')
     complemento = request.POST.get('inputComplementoEndereco')
@@ -71,7 +71,7 @@ def pesquisa_usuarios(request):
             data_nascimento__icontains=data_nascimento,
             cpf__icontains=cpf,
             cns__icontains=cns,
-            nome_mae__icontains=nome_mae).order_by('-nome_completo')
+            nome_mae__icontains=nome_mae).order_by('-nome_usuario')
         print(usuario)
 
         return render(request, 'pesq_usuarios.html', {'usuarios': usuario})

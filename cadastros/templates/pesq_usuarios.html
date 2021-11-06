@@ -7,6 +7,7 @@ Cadastro de usuários
 {% block 'conteudo' %}
 
 <div class="container  border-container">
+    <br>
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Pesquisa</a>
@@ -18,63 +19,64 @@ Cadastro de usuários
     <h2>Pesquisa de Usuário</h2>
     <form action="{% url 'pesquisa_usuarios' %}" method="POST"> {% csrf_token %}
         <div class="form-row">
+            <input type="hidden" name="formulario_pesquisa" id="formulario_pesquisa" value='1'>
             <div class="form-group col-md-8">
                 <label for="inputNome">Nome Completo</label>
-                <input type="text" class="form-control" name="nome_completo" id="inputNome" placeholder="Nome completo">
+                <input type="text" class="form-control form-control-sm" name="nome_completo" id="inputNome"
+                    placeholder="Nome completo">
             </div>
             <div class="form-group col-md-4">
                 <label for="inputDataNasc">Data de Nascimento</label>
-                <input type="date" class="form-control" name="data_nascimento" id="inputDataNasc">
+                <input type="date" class="form-control form-control-sm" name="data_nascimento" id="inputDataNasc">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-2">
                 <label for="inputCPF">C.P.F.</label>
-                <input type="text" class="form-control" name="cpf" id="inputCPF" oninput="mascara(this, 'cpf')"
-                    placeholder="000.000.000-00">
+                <input type="text" class="form-control form-control-sm" name="cpf" id="inputCPF"
+                    oninput="mascara(this, 'cpf')" placeholder="000.000.000-00">
+                <br>
+                <button type="submit" id="buttonPesquisar" class="btn btn-primary">Pesquisar</button>
             </div>
             <div class="form-group col-md-2">
                 <label for="inputCNS">C.N.S.</label>
-                <input type="text" class="form-control" name="cns" id="inputCNS" onfocusout="teste(this)"
-                    oninput="mascara(this, 'cns')" placeholder="000.0000.0000.0000">
+                <input type="text" class="form-control form-control-sm" name="cns" id="inputCNS"
+                    onfocusout="teste(this)" oninput="mascara(this, 'cns')" placeholder="000.0000.0000.0000">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputNomeMae">Nome da Mãe</label>
-                <input type="text" class="form-control" name="nome_mae" id="inputNomeMae" placeholder="Nome da Mãe">
-            </div>
-            <div class="form-group col-md-2">
-                <button type="submit" id="buttonPesquisar" class="btn btn-primary">Pesquisar</button>
+                <input type="text" class="form-control form-control-sm" name="nome_mae" id="inputNomeMae"
+                    placeholder="Nome da Mãe">
             </div>
     </form>
-    <div class="table-responsive-sm">
-        <table class="table table-hover table-sm">
+    <div class="table-responsive table-responsive-lg">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Nome Completo</th>
+                    <th scope="col">Dt Nasc.</th>
                     <th scope="col">Nome da Mãe</th>
                     <th scope="col">C.P.F.</th>
                     <th scope="col">C.N.S.</th>
                 </tr>
             </thead>
             <tbody>
+                {% if usuarios %}
+                {% for usuario in usuarios %}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>EDUARDO FRANCISCO MACHADO DOS SANTOS</td>
-                    <td>MARIA ELIZABETE DE SOUZA MACHADO</td>
-                    <td>372.761.288-65</td>
-                    <td>704.8000.8234.0001</td>
+                    <th scope="row">{{ usuario.id }}</th>
+                    <td>{{ usuario.nome_completo }}</td>
+                    <td>{{ usuario.get_data_nascimento }}</td>
+                    <td>{{ usuario.nome_mae }}</td>
+                    <td>{{ usuario.cpf }}</td>
+                    <td>{{ usuario.cns }}</td>
                 </tr>
+                {% endfor %}
+                {% endif %}
             </tbody>
         </table>
 
-        {% if usuario %}
-        { usuario.nome_completo }
-
-        TESTE
-        {% endif %}
-
-        TESTE2
     </div>
 </div>
 </div>
@@ -87,11 +89,6 @@ Cadastro de usuários
         if (isNaN(v[v.length - 1])) {
             i.value = v.substring(0, v.length - 1);
             return;
-        }
-
-        if (t == "data") {
-            i.setAttribute("maxlength", "10");
-            if (v.length == 2 || v.length == 5) i.value += "/";
         }
 
         if (t == "cpf") {

@@ -26,6 +26,9 @@ class Usuarios(models.Model):
     ponto_referencias = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
 
+    def get_data_nascimento(self):
+        return self.data_nascimento.strftime('%d/%m/%Y')
+
 
 class Telefones(models.Model):
     choices = {

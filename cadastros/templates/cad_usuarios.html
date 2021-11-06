@@ -29,6 +29,7 @@ Cadastro de usuários
     <h2>Cadastro de Usuário</h2>
     <form action="{% url 'valida_usuario' %}" method="POST"> {% csrf_token %}
         <div class="form-group">
+            <input type="hidden" name="id" id="id">
             <label for="inputNome">Nome Completo</label>
             <input input class="form-control form-control-sm" type="text" class="form-control" name="inputNome"
                 id="inputNome" placeholder="Nome completo">

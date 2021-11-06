@@ -33,6 +33,7 @@ def valida_usuario(request):
 
     if not usuario_cadastrado:
         usuario = Usuarios(nome_completo=nome_completo,
+                           nome_social=nome_social,
                            sexo=sexo,
                            cpf=cpf,
                            cns=cns,
@@ -55,22 +56,24 @@ def valida_usuario(request):
 
 
 def pesquisa_usuarios(request):
-    if request.POST.get('nome_completo'):
-        usuario_pesquisa = request.POST.get('nome_completo')
+    if request.POST.get('formulario_pesquisa'):
+        nome_usuario = request.POST.get('nome_completo')
         if not request.POST.get('data_nascimento'):
-            data_nascimento = None
+            data_nascimento = ''
         else:
             data_nascimento = request.POST.get('data_nascimento')
         cpf = request.POST.get('cpf')
         cns = request.POST.get('cns')
         nome_mae = request.POST.get('nome_mae')
+        print(nome_mae)
+        usuario = Usuarios.objects.filter(
+            nome_completo__icontains=nome_usuario,
+            data_nascimento__icontains=data_nascimento,
+            cpf__icontains=cpf,
+            cns__icontains=cns,
+            nome_mae__icontains=nome_mae).order_by('-nome_completo')
+        print(usuario)
 
-        usuario = Usuarios.objects.filter(nome_completo__icontains=usuario_pesquisa,
-                                          data_nascimento=data_nascimento,
-                                          cpf=cpf,
-                                          cns=cns,
-                                          nome_mae=nome_mae)
-
-        return render(request, 'pesq_usuarios.html', {'usuario': usuario})
+        return render(request, 'pesq_usuarios.html', {'usuarios': usuario})
     else:
         return render(request, 'pesq_usuarios.html')
